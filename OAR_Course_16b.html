@@ -161,7 +161,7 @@
     <div class="reg-stats">
       <div class="reg-stat"><span>6</span><small>Modules</small></div>
       <div class="reg-stat"><span>23</span><small>Exam questions</small></div>
-      <div class="reg-stat"><span>70%</span><small>Passing score</small></div>
+      <div class="reg-stat"><span>75%</span><small>Passing score</small></div>
       <div class="reg-stat"><span>CO 16-B</span><small>DGAC Regulation</small></div>
     </div>
   </div>
@@ -192,7 +192,7 @@
 <!-- FAIL -->
 <div class="screen" id="screen-fail">
   <div class="hdr fail-hdr"><div class="hdr-row"><div><h1>Exam not passed</h1><p id="fail-score"></p></div><button class="btn btn-back no-print" onclick="startExam()">Retake exam →</button></div></div>
-  <div class="card"><p style="font-size:14px;margin-bottom:12px;">You need at least <strong>70%</strong> (16/23) to obtain the certificate. Review the correct answers below, revisit the modules, and try again.</p><button class="btn btn-primary no-print" onclick="startExam()">Retake exam →</button></div>
+  <div class="card"><p style="font-size:14px;margin-bottom:12px;">You need at least <strong>75%</strong> (18/23) to obtain the certificate. Review the correct answers below, revisit the modules, and try again.</p><button class="btn btn-primary no-print" onclick="startExam()">Retake exam →</button></div>
   <div id="fail-review"></div>
 </div>
 
@@ -205,7 +205,7 @@
   <div class="cert-page">
     <div class="cert-top">
       <div class="cert-logo-row">
-        <div style="display:flex;align-items:center;gap:12px;"><div style="background:white;border-radius:10px;padding:8px 12px;"><img src="https://www.grupooneair.com/wp-content/uploads/2016/06/grupo-one-air-aviacion.png" alt="ONE AIR" style="height:28px"></div></div>
+        <div style="display:flex;align-items:center;gap:12px;"><div style="background:white;border-radius:10px;padding:8px 12px;"><img src="https://www.grupooneair.com/wp-content/uploads/2016/06/grupo-one-air-aviacion.png" alt="ONE AIR" style="height: 100px;width: auto"></div></div>
         <div class="cert-brand"><div class="org">ONE AIR FLIGHT TRAINING</div><div class="dept">Quality and Safety Department</div></div>
       </div>
       <div class="cert-title-block">
@@ -232,7 +232,7 @@
     </div>
   </div>
   <div class="ans-page">
-    <div class="ans-hdr"><div style="flex-shrink:0;"><img src="https://www.grupooneair.com/wp-content/uploads/2016/06/grupo-one-air-aviacion.png" alt="ONE AIR" style="height:28px"></div><div><h2>Exam review</h2><p>See the correct answers for each question</p></div></div>
+    <div class="ans-hdr"><div style="flex-shrink:0;"><img src="https://www.grupooneair.com/wp-content/uploads/2016/06/grupo-one-air-aviacion.png" alt="ONE AIR" style="height:28px"></div><div><h2>Exam review</h2><p id="ans-subtitle">See the correct answers for each question</p></div></div>
     <div class="ans-body">
       <div class="stats-grid"><div class="stat-card"><div class="stat-num" id="ans-correct" style="color:var(--green);">—</div><div class="stat-label">Correct</div></div><div class="stat-card"><div class="stat-num" id="ans-wrong" style="color:var(--red);">—</div><div class="stat-label">Incorrect</div></div><div class="stat-card"><div class="stat-num" id="ans-score2">—</div><div class="stat-label">Score</div></div></div>
       <div class="ans-grid" id="ans-grid"></div>
@@ -512,7 +512,7 @@ function submitExam(){
   state.examDone=true;
   let correct=0;QUESTIONS.forEach((q,i)=>{if(state.examAnswers[i]===q.ans)correct++;});
   const score=Math.round(correct/QUESTIONS.length*100);
-  if(score>=70){showCertificate(correct,score);}
+  if(score>=75){showCertificate(correct,score);}
   else{
     document.getElementById('fail-score').textContent=score+'% — '+correct+' of '+QUESTIONS.length+' correct answers';
     renderExam();

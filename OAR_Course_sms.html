@@ -244,7 +244,7 @@
 <div class="screen" id="screen-exam">
   <div class="hdr">
     <div class="hdr-row">
-      <div><h1>Final assessment</h1><p>25 questions — you need at least 18 correct answers (75%) to pass</p></div>
+      <div><h1>Final assessment</h1><p>25 questions — you need at least 19 correct answers (75%) to pass</p></div>
       <button class="btn btn-back" onclick="showScreen('screen-index')">← Index</button>
     </div>
     <div class="progress-bar" style="margin-top:10px;"><div class="progress-fill" id="exam-progress-fill" style="width:0%"></div></div>
@@ -537,10 +537,14 @@ function submitExam(){
   if(score>=75){showCertificate(correct,score);}
   else{
     document.getElementById('fail-score').textContent=score+'% — '+correct+' out of '+QUESTIONS.length+' correct answers';
-    renderExam();
-    const fr=document.getElementById('fail-review');
-    fr.innerHTML='<div class="card"><h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">Questions you got wrong — correct answers:</h3>'+
-      QUESTIONS.map((q,i)=>state.examAnswers[i]!==q.ans?`<div class="key-point"><span class="kp-icon" style="color:var(--red);">✗</span><span style="font-size:13px;">Question ${i+1}: ${q.q}<br><em style="color:var(--green);">Correct: ${q.opts[q.ans]}</em></span></div>`:'').join('')+'</div>';
+    try{
+      renderExam();
+      const fr=document.getElementById('fail-review');
+      fr.innerHTML='<div class="card"><h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">Questions you got wrong — correct answers:</h3>'+
+        QUESTIONS.map((q,i)=>state.examAnswers[i]!==q.ans?`<div class="key-point"><span class="kp-icon" style="color:var(--red);">✗</span><span style="font-size:13px;">Question ${i+1}: ${q.q}<br><em style="color:var(--green);">Correct: ${q.opts[q.ans]}</em></span></div>`:'').join('')+'</div>';
+    }catch(err){
+      console.error('Error building review:', err);
+    }
     showScreen('screen-fail');
   }
 }

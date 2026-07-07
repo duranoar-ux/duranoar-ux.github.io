@@ -515,10 +515,14 @@ function submitExam(){
   if(score>=75){showCertificate(correct,score);}
   else{
     document.getElementById('fail-score').textContent=score+'% — '+correct+' of '+QUESTIONS.length+' correct answers';
-    renderExam();
-    const fr=document.getElementById('fail-review');
-    fr.innerHTML='<div class="card"><h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">Missed questions — correct answers:</h3>'+
-      QUESTIONS.map((q,i)=>state.examAnswers[i]!==q.ans?`<div class="key-point"><span class="kp-icon" style="color:var(--red);">✗</span><span style="font-size:13px;">Q${i+1}: ${q.q}<br><em style="color:var(--green);">✓ ${q.opts[q.ans]}</em></span></div>`:'').join('')+'</div>';
+    try{
+      renderExam();
+      const fr=document.getElementById('fail-review');
+      fr.innerHTML='<div class="card"><h3 style="font-size:15px;font-weight:600;margin-bottom:8px;">Missed questions — correct answers:</h3>'+
+        QUESTIONS.map((q,i)=>state.examAnswers[i]!==q.ans?`<div class="key-point"><span class="kp-icon" style="color:var(--red);">✗</span><span style="font-size:13px;">Q${i+1}: ${q.q}<br><em style="color:var(--green);">✓ ${q.opts[q.ans]}</em></span></div>`:'').join('')+'</div>';
+    }catch(err){
+      console.error('Error building review:', err);
+    }
     showScreen('screen-fail');
   }
 }
